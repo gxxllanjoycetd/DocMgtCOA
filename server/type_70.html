@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body style=width:100%;height:auto;>
+    <div>
+        <img src="dash.png " style=width:100%;height:auto;margin-top:5px; />
+    </div>
+    <div style=font-size:20px;>
+        <center>Limited Source Bidding</center>
+    </div>
+    <section>
+        <article>
+            <div id="myDIV" class="header">
+                <h2 style="margin:5px">Supporting Documentary Requirements</h2>
+                <input type="text" id="myInput" placeholder="Additional Requirements">
+                <span onclick="newElement()" class="addBtn">Add</span>
+            </div>
+
+            <ul id="myUL">
+                <li>Certificate of Availability of Funds issued by the Chief Accountant</li>
+                <li>Existence of lawful and sufficient allotment duly obligated as certified by authorized officials [except for government-owned and controlled corporations/government financing institutions (GOCCs/GFIs)]
+                </li>
+                <li>Legality of transaction and conformity with laws, rules or regulations</li>
+                <li>Approval of expenditure by Head of Office or his authorized representative</li>
+                <li>Sufficient and relevant documents to establish validity of claim</li>
+                <li>Purchase Order/Letter Order/Contract, duly approved by the official concerned and accepted by the supplier (date of acceptance must be clearly indicated, especially when the time or date of delivery is dependent on or will be counted from
+                    the date of acceptance of the purchase order/letter order/contract)</li>
+                <li>Proof of posting of invitation or request for submission of price quotation in the PhilGEPS website, website of the procuring agency, if available, and at any conspicuous place reserved for this purpose in the premises of the procuring
+                    agency for a period of seven calendar days in case of Shopping under Section 52.1(b), and Negotiated Procurement under Sections 53.1 (two failed bidding) and 53.9 (small value procurement) of the Revised IRR of RA No. 9184</li>
+                <li>Performance and warranty securities, except for shopping and negotiated procurement under emergency cases, small value procurement, lease of real property and United Nation (UN) agencies</li>
+                <li>BAC Resolution recommending and justifying to the Head of Procuring Entity (HOPE) the use of alternative mode of procurement and approval by the HOPE of the BAC Resolution recommending award of contract</li>
+                <li>Proof of posting of Notice of Award in the PhilGEPs website, the website of the procuring entity concerned, if available, and at any conspicuous place reserved for this purpose in the premises of the procuring entity</li>
+                <li>Approved Procurement Plan</li>
+                <li>Request for purchase or requisition of supplies, materials and equipment, duly approved by proper authorities</li>
+                <li>Original copy of the delivery invoice showing the quantity, description of the articles, unit and total value, duly signed by the dealer or his representative and indicating receipt by the proper agency official of items delivered</li>
+                <li>Inspection and acceptance report signed "Inspected by" by the authorized agency inspector and signed "accepted by" by the authorized end-user to whom the item was delivered or the property officer if item is for stock</li>
+                <li>Approval by the HOPE or his duly authorized representative on the use of the alternative methods of procurement, as recommended by the BAC</li>
+                <li>Statement of the prospective bidder that it is not blacklisted or barred from bidding by the Government or any of its agencies, offices, corporations or LGUs</li>
+                <li>Sworn affidavit of the bidder that it is not related to the HOPE by consanguinity or affinity up to the third civil degree
+                </li>
+                <li>Copy of direct invitation to bid served by the concerned agency to all suppliers or consultants appearing in the pre-selected list of manufacturers/suppliers/distributors with known experience and proven capability on the requirements
+                    of the particular contract</li>
+                <li>Winning bidder's offer or proposal</li>
+                <li>Abstract of bids showing the most responsive and complying bidder from among the other bidders who participated in the bidding
+                </li>
+                <li>Notice of Award</li>
+                <li>Documentary requirements under Sections 23. l and 25.2(a) for goods, 23.1 and 25.2(b) for infrastructure, 25.1 and 25.2(c) for consultancy services, of the Revised IRR of RA No. 9184</li>
+                <li>Such other documents peculiar to the contract and/or to the mode of procurement and considered necessary in the auditorial review and in the technical evaluation thereof</li>
+                <li>Bid security (required under Section 54.4 IRR-A, RA No. 9184)</li>
+            </ul>
+        </article>
+        <nav>
+            <div>
+                <form style="font-size: 18px; " >
+                    <div>
+                        <h4 style="margin:5px">JEV Number :</h4>
+                        <input style="width: 95%;" type="text" id="myInput" placeholder="Enter JEV No." class="jev_num">
+                    </div>
+                    <div>
+                        <h4 style="margin:5px">Check Number :</h4>
+                        <input style="width: 95%;" type="text" id="myInput" placeholder="Enter Check No." class="check_num">
+                    </div>
+                    <div>
+                        <h4 style="margin:5px">Amount</h4>
+                        <input style="width: 95%;" type="text" id="myInput" placeholder="Enter Amount" class="amount">
+                    </div>
+                    <div>
+                        <h4 style="margin:5px">Status</h4>
+                    </div>
+                    <div class="styled-select slate" style="width: 300px">
+                        <select id="sel_opt" class="status">
+                            <option value="Submitted" class="status">Submitted</option>
+                            <option value="Unsubmitted" class="status">Unsubmitted</option>
+                            <option value="Cancelled" class="status">Cancelled</option>
+                        </select>
+                    </div>
+                    <div>
+                        <h4 style="margin:5px">Voucher Number :</h4>
+                        <input style="width: 95%;" type="text" id="myInput" placeholder="Enter Voucher No." class="voucher_num">
+                    </div>
+                    <div>
+                        <h4 style="margin:5px">Date of Voucher :</h4>
+                        <input style="width: 95%;" type="text" id="myInput" placeholder="Enter Date of Voucher" class="voucher_date">
+                    </div>
+                    <div>
+                        <h4 style="margin:5px">Payee :</h4>
+                        <input style="width: 95%;" type="text" id="myInput" placeholder="Enter Payee" class="payee">
+                    </div>
+                    <div>
+                        <h4 style="margin:5px">Source of Fund :</h4>
+                        <input style="width: 95%;" type="text" id="myInput" placeholder="Enter Source of Fund" class="source_fund">
+                    </div>
+                    <div>
+                        <h4 style="margin:5px">Type of Transaction :</h4>
+                        <input style="width: 95%;" type="text" id="myInput" value="Limited Source Bidding"  class="transaction_type">
+                    </div>
+                    <div>
+                        <h4 style="margin:5px">Submitted Documents :</h4>
+                        <input style="width: 95%;" type="text" id="myInput" placeholder="List" class="sub_doc">
+                    </div>
+                    <div>
+                        <h4 style="margin:5px">Unsubmitted Documents :</h4>
+                        <input style="width: 95%;" type="text" id="myInput" placeholder="List" class="unsub_doc">
+                    </div>
+                    <br><br><br>
+                    <button type="submit " form="form1 " value="Submit " id="savedata">SAVE</button>
+                </form>
+            </div>
+        </nav>
+    </section>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="checklist.js"></script>
+    <script type="text/javascript">
+        $(document).ready(() => {
+            own_url = window.location.href;
+            arr = own_url.split("=");
+            id = arr[1];
+            arr2 = own_url.split("/")
+            real_url = arr2[3]
+            arr3 = real_url.split("?")
+            sav_url =arr3[0]
+            //console.log(sav_url);
+            if(id){
+                $.ajax({
+                    url:'update_record/'+id,
+                    type:'get',
+                    dataType:'json',
+                    success: function(ret){
+                        //console.log(ret['res']);
+                        data=ret['res'];
+                        $('.jev_num').val(data[0].jev_num);
+                        $('.check_num').val(data[0].check_num);
+                        $('.amount').val(data[0].amount);
+                        $('.status').val(data[0].status);
+                        $('.voucher_num').val(data[0].voucher_num);
+                        $('.voucher_date').val(data[0].voucher_date);
+                        $('.payee').val(data[0].payee);
+                        $('.source_fund').val(data[0].source_fund);
+                        $('.transaction_type').val(data[0].transaction_type);
+                        $('.sub_doc').val(data[0].sub_doc);
+                        $('.unsub_doc').val(data[0].unsub_doc);
+                        //$("#update_modal").modal('show');
+                    }
+                })
+            }
+            $('#savedata').click(() => {
+                if(!id){                    
+                    $.ajax({                        // all URLs are relative to http://localhost:3000/
+                url: 'insert_record',
+                        type: 'get',
+                dataType: 'json',
+                data: {
+                        jev_num: $('.jev_num').val(),
+                        check_num: $('.check_num').val(),
+                        amount: $('.amount').val(),
+                        status: $('#sel_opt').val(),
+                        voucher_num: $('.voucher_num').val(),
+                        voucher_date: $('.voucher_date').val(),
+                        payee: $('.payee').val(),
+                        source_fund: $('.source_fund').val(),
+                        transaction_type: $('.transaction_type').val(),
+                        sub_doc: $('.sub_doc').val(),
+                                unsub_doc: $('.unsub_doc').val(),
+                                own_url:sav_url
+                },
+                success: (data) => {
+                            window.location.replace("http://localhost:3000");
+                        },
+                    });
+                } else {
+                    //alert("update")
+                    $.ajax({
+                        url:"realupdate_record",
+                        type:'get',
+                        dataType:'json',
+                        data: {
+                                jev_id: id,
+                                jev_num: $('.jev_num').val(),
+                                check_num: $('.check_num').val(),
+                                amount: $('.amount').val(),
+                                status: $('#sel_opt').val(),
+                                voucher_num: $('.voucher_num').val(),
+                                voucher_date: $('.voucher_date').val(),
+                                payee: $('.payee').val(),
+                                source_fund: $('.source_fund').val(),
+                                transaction_type: $('.transaction_type').val(),
+                                sub_doc: $('.sub_doc').val(),
+                                unsub_doc: $('.unsub_doc').val(),
+                                own_url:sav_url
+                },
+                        success: function(ret) {
+                            console.log("update success")
+                            window.location.replace("http://localhost:3000");
+                        } 
+                });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

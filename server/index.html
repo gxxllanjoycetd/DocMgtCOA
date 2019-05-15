@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document Management System</title>
+    <!-- <link rel="stylesheet" href="bootstrap_style.css"> -->
+    <link rel="stylesheet" href="bootstrap-table.css">
+    
+    <link rel="stylesheet" type="text/css" href="jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="dataTables.tableTools.css" />
+    <script>
+        function openWin() {
+            window.open("select.html");
+        }
+    </script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        #myInput {
+            /* background-image: url('/css/searchicon.png'); */
+            background-position: 10px 10px;
+            background-repeat: no-repeat;
+            width: 100%;
+            font-size: 16px;
+            padding: 12px 20px 12px 40px;
+            border: 1px solid #ddd;
+            margin-bottom: 12px;
+        }
+        
+        #myTable {
+            border-collapse: collapse;
+            width: 100%;
+            border: 1px solid #ddd;
+            font-size: 18px;
+        }
+        
+        #myTable th,
+        #myTable td {
+            text-align: left;
+            padding: 12px;
+        }
+        
+        #myTable tr {
+            border-bottom: 1px solid #ddd;
+        }
+        
+        #myTable tr.header,
+        #myTable tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+    <link href="bootstrap.min.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body style=width:100%;height:auto;>
+    <div>
+        <img src="header.png " style=width:100%;height:auto;margin-top:5px;/>
+    </div>    
+    <div>
+        <form>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="Add New Record" onclick="openWin()"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="button" id="del_record" value="Delete Record" onclick="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="button" id="refresh_table" value="Reload Table" onclick="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="button" id="update_record" value="Update Record" onclick="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="button" id="gernerate_report" value="Generate Report" onclick="">
+        </form>
+    </div>
+    <br>
+    <input style="width: 99%" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search...">
+
+    <div class="col-md-12" style="min-height: 150px;" id="jevtable"></div>
+
+    <div id="update_modal" class="modal fade" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title">Update Record</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form style="font-size: 18px; " >
+                            <div>
+                                <div class="col-md-4">
+                                    <h4 style="margin:5px">JEV Number :</h4>
+                                </div>
+                                <div class="col-md-8">
+                                    <input style="width: 95%;" type="text" id="myInput" placeholder="Enter JEV No." class="jev_nums">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="col-md-4">
+                                    <h4 style="margin:5px">Check Number :</h4>
+                                </div>
+                                <div class="col-md-8">
+                                    <input style="width: 95%;" type="text" id="myInput" placeholder="Enter Check No." class="check_nums">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="col-md-4">
+                                    <h4 style="margin:5px">Amount</h4>
+                                </div>
+                                <div class="col-md-8">
+                                    <input style="width: 95%;" type="text" id="myInput" placeholder="Enter Amount" class="amounts">
+                                </div>                                    
+                            </div>
+                            <div>
+                                <div class="col-md-4">
+                                    <h4 style="margin:5px">Status</h4>
+                                </div>
+                                <div class="col-md-8">
+                                        <select id="sel_opt" class="statuss">
+                                            <option value="Submitted" class="status">Submitted</option>
+                                            <option value="Unsubmitted" class="status">Unsubmitted</option>
+                                            <option value="Cancelled" class="status">Cancelled</option>
+                                        </select>
+                                        <h6 style="margin:5px" aria-hidden="true">Select the status</h6>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="col-md-4">
+                                    <h4 style="margin:5px">Voucher Number :</h4>
+                                </div>
+                                <div class="col-md-8">
+                                    <input style="width: 95%;" type="text" id="myInput" placeholder="Enter Voucher No." class="voucher_nums">
+                                </div>                                    
+                            </div>
+                            <div>
+                                <div class="col-md-4">
+                                    <h4 style="margin:5px">Date of Voucher :</h4>
+                                </div>
+                                <div class="col-md-8">
+                                    <input style="width: 95%;" type="text" id="myInput" placeholder="Enter Date of Voucher" class="voucher_dates">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="col-md-4">
+                                    <h4 style="margin:5px">Payee :</h4>
+                                </div>
+                                <div class="col-md-8">
+                                    <input style="width: 95%;" type="text" id="myInput" placeholder="Enter Payee" class="payees">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="col-md-4">
+                                    <h4 style="margin:5px">Source of Fund :</h4>
+                                </div>
+                                <div class="col-md-8">
+                                    <input style="width: 95%;" type="text" id="myInput" placeholder="Enter Source of Fund" class="source_funds">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="col-md-4">
+                                    <h4 style="margin:5px">Type of Transaction </h4>
+                                </div>
+                                <div class="col-md-8">
+                                    <input style="width: 95%;" type="text" id="myInput" value="Payroll Fund for Salaries, Wages, Allowances, Honoraria and Other Similar Expenses (Granting of CA)" class="transaction_types">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="col-md-4">
+                                    <h4 style="margin:5px">Submitted Documents :</h4>
+                                </div>
+                                <div class="col-md-8">
+                                    <input style="width: 95%;" type="text" id="myInput" placeholder="List" class="sub_docs">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="col-md-4">
+                                    <h4 style="margin:5px">Unsubmitted Documents :</h4>
+                                </div>
+                                <div class="col-md-8">
+                                    <input style="width: 95%;" type="text" id="myInput" placeholder="List" class="unsub_docs">
+                                </div>
+                            </div>
+                            <br><br><br>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="btn dark btn-outline">Close</button>
+                        <button type="button" id="update_button" class="btn green">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="generate_modal" class="modal fade" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h1 class="modal-title" style="text-align:center">Generate Repot</h1>
+                        </div>
+                        <div class="modal-body">
+                            <form style="font-size: 18px; " >
+                                <div>
+                                    <div class="col-md-4">
+                                        <h4 style="margin:5px">JEV Number :</h4>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h4 class="jev_num_text" style="width: 95%;margin:5px">jve number</h4>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="col-md-4">
+                                        <h4 style="margin:5px">Check Number :</h4>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h4 class="check_num_text" style="margin:5px">Check Number</h4>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="col-md-4">
+                                        <h4 style="margin:5px">Amount</h4>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h4 class="amount_text" style="margin:5px">>Amount</h4>
+                                    </div>                                   
+                                </div>
+                                <div>
+                                    <div class="col-md-4">
+                                        <h4 style="margin:5px">Status</h4>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h4 class="status_text" style="margin:5px">Status</h4>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="col-md-4">
+                                        <h4 style="margin:5px">Voucher Number :</h4>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h4 class="voucher_num_text" style="margin:5px">Voucher Number</h4>
+                                    </div>                                   
+                                </div>
+                                <div>
+                                    <div class="col-md-4">
+                                        <h4 style="margin:5px">Date of Voucher :</h4>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h4 class="voucher_date_text" style="margin:5px">Date of Voucher</h4>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="col-md-4">
+                                        <h4 style="margin:5px">Payee :</h4>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h4 class="payee_text" style="margin:5px">Payee</h4>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="col-md-4">
+                                        <h4 style="margin:5px">Source of Fund :</h4>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h4 class="source_fund_text" style="margin:5px">Source of Fund</h4>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="col-md-4">
+                                        <h4 style="margin:5px">Transaction </h4>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h4 class="transaction_type" style="margin:5px">Type of Transaction</h4>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="col-md-4">
+                                        <h4 style="margin:5px">Submitted</h4>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h4 class="submit_doc_text" style="margin:5px">Submitted Documents</h4>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="col-md-4">
+                                        <h4 style="margin:5px">Unsubmitted</h4>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h4 class="unsubmit_doc_text" style="margin:5px">Unsubmitted Documents</h4>
+                                    </div>
+                                </div>
+                                <br><br><br>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <!-- <button type="button" data-dismiss="modal" class="btn dark btn-outline">Close</button>
+                            <button type="button" class="btn green">Save changes</button> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+      
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="bootstrap-table.js"></script>
+    <script src="jquery.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <script>
+
+
+        $(document).ready(function(){
+
+         
+
+            getTable();
+            function getTable(){
+                $.ajax({
+                    type: "get",
+                    url: "/getTable",
+                    dataType: 'json',       
+                    success: function(ret){
+                        var retString = `<table id="myTable" style="width: 99%">
+                                            <thead>
+                                                <tr class="header" align="center">
+                                                    <th style="width: 2%; text-align: center"></th>
+                                                    <th style="width: 5%; text-align: center">JEV No.</th>
+                                                    <th style="width: 5%; text-align: center">Check No.</th>
+                                                    <th style="width: 5%; text-align: center">Amount</th>
+                                                    <th style="width: 5%; text-align: center">Status</th>
+                                                    <th style="width: 5%; text-align: center">Voucher No.</th>
+                                                    <th style="width: 8%; text-align: center">Date</th>
+                                                    <th style="width: 5%; text-align: center">Payee</th>
+                                                    <th style="width: 13%; text-align: center">Source of Fund</th>
+                                                    <th style="width: 36%; text-align: center">Type of Transaction</th>
+                                                    <th style="width: 10%; text-align:center">Incomplete/Complete</th>                                                
+                                                </tr>
+                                            </thead>
+                                            <tbody>`;
+                            retString += ret['res'];
+                            retString +=  `</tbody></table>`;
+                        $("#jevtable").html(retString);
+                        // ret = JSON.parse(ret);
+                    }
+                })
+            }
+        })
+            
+
+        $("body").on("click","#refresh_table",function(){
+            alert("Refresh the data tables ?");
+            window.location.href = "http://localhost:3000";
+        })
+
+        $("body").on("click","#del_record",function(){
+            var id = $('#jevtable input[type="checkbox"]:checked').map(function () {
+                return $(this).val();
+            }).get();
+            
+            $.ajax({
+                url: "delete_record/"+id,
+                type: "get",                
+                //data: {id:id},
+                success: function(ret) {
+                    alert("Delete successfully");
+                    window.location.href = "http://localhost:3000";
+                }
+            });
+        })
+
+        $("body").on("click","#update_record",function(){
+            var id = $('#jevtable input[type="checkbox"]:checked').map(function () {
+                return $(this).val();
+            }).get();
+            if(id.length>0){
+                $.ajax({
+                    url:"update_record/"+id,
+                    type:'get',
+                    dataType:'json',
+                    success: function(ret) {
+                        data = ret['res'];
+                        url = window.location.href;
+                        ret_url = url;
+                        ret_url += data[0].own_url;
+                        ret_url += '?mode=';
+                        ret_url += data[0].jev_id;
+                         window.location.href = ret_url;                        
+                    }
+                })
+                //$('.jev_num_text').html("sdfsfsfsdfs")
+            } else {
+                alert("Please check the row!")
+            }
+        })
+
+        $("body").on("click","#gernerate_report",function(){
+            var id = $('#jevtable input[type="checkbox"]:checked').map(function () {
+                return $(this).val();
+            }).get();
+            if(id.length>0){
+                $.ajax({
+                    url:"generate_report/"+id,
+                    type:'get',
+                    dataType:'json',
+                    success: function(ret) {
+                        data = ret['res'];
+                        $('.jev_num_text').html(data[0].jev_num);
+                        $('.check_num_text').html(data[0].check_num);
+                        $('.amount_text').html(data[0].amount);
+                        $('.status_text').html(data[0].status);
+                        $('.voucher_num_text').html(data[0].voucher_num);
+                        $('.voucher_date_text').html(data[0].voucher_date);
+                        $('.payee_text').html(data[0].payee);
+                        $('.source_fund_text').html(data[0].source_fund);
+                        $('.transaction_type_text').html(data[0].transaction_type);
+                        $('.sub_doc_text').html(data[0].sub_doc);
+                        $('.unsub_doc_text').html(data[0].unsub_doc);
+                        $("#generate_modal").modal('show');
+                    }
+                })
+                //$('.jev_num_text').html("sdfsfsfsdfs")
+            } else {
+                alert("Please check the row!")
+            }
+        })        
+    </script>
+
+</body>
+
+</html>
+
