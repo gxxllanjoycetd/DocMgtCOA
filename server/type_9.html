@@ -20,31 +20,13 @@
         <article>
             <div id="myDIV" class="header">
                 <h2 style="margin:5px">Supporting Documentary Requirements</h2>
-                <input type="text" id="myInput" placeholder="Additional Requirements">
-                <span onclick="newElement()" class="addBtn">Add</span>
+                <input type="text" class="add_check" id="myInput" placeholder="Additional Requirements">
+                <span class="addBtn">Add</span>
+                <span class="removeBtn">Delete</span>
             </div>
 
             <ul id="myUL">
-                <li>Certificate of Availability of Funds issued by the Chief Accountant</li>
-                <li>Existence of lawful and sufficient allotment duly obligated as certified by authorized officials [except for government-owned and controlled corporations/government financing institutions (GOCCs/GFIs)]
-                </li>
-                <li>Legality of transaction and conformity with laws, rules or regulations</li>
-                <li>Approval of expenditure by Head of Office or his authorized representative</li>
-                <li>Sufficient and relevant documents to establish validity of claim</li>
-                <li>Paper/electronic plane, boat or bus tickets, boarding pass, terminal fee</li>
-                <li>Certificate of appearance/attendance</li>
-                <li>Copy of previously approved itinerary of travel</li>
-                <li>Revised or supplemental Office Order or any proof supporting the change of schedule</li>
-                <li>Revised Itinerary of Travel, if the previous approved itinerary was not followed</li>
-                <li>Certification by the Head of Agency as to the absolute necessity of the expenses together with the corresponding bills or receipts, if the expenses incurred for official travel exceeded the prescribed rate per day (certification or affidavit
-                    of loss shall not be considered as an appropriate replacement for the required hotel/lodging bills and receipts)
-                </li>
-                <li>Liquidation Report</li>
-                <li>Reimbursement Expense Receipt (RER)</li>
-                <li>OR in case of refund of excess cash advance</li>
-                <li>Certificate of Travel Completed</li>
-                <li>Hotel room/lodging bills with official receipts in the case of official travel to places within 50-kilometer radius from the last city or municipality covered by the Metro Manila Area, or the city or municipality where their permanent
-                    official station is located in the case of those outside the Metro Manila Area, if the travel allowances being claimed include the hotel room/lodging rate</li>
+                
             </ul>
         </article>
         <nav>
@@ -114,18 +96,17 @@
             own_url = window.location.href;
             arr = own_url.split("=");
             id = arr[1];
-            arr2 = own_url.split("/")
+            arr2 = own_url.split("/");
             real_url = arr2[3]
-            arr3 = real_url.split("?")
-            sav_url =arr3[0]
-            //console.log(sav_url);
+            arr3 = real_url.split("?");
+            sav_url =arr3[0];
+            console.log(sav_url);
             if(id){
                 $.ajax({
                     url:'update_record/'+id,
                     type:'get',
                     dataType:'json',
                     success: function(ret){
-                        //console.log(ret['res']);
                         data=ret['res'];
                         $('.jev_num').val(data[0].jev_num);
                         $('.check_num').val(data[0].check_num);
@@ -138,10 +119,42 @@
                         $('.transaction_type').val(data[0].transaction_type);
                         $('.sub_doc').val(data[0].sub_doc);
                         $('.unsub_doc').val(data[0].unsub_doc);
-                        //$("#update_modal").modal('show');
                     }
                 })
             }
+            $.ajax({
+                url : 'read_check/',
+                type : 'get',
+                data : { own_url : sav_url},
+                success : function(ret) {
+                    $('#myUL').html(ret['res']);
+                }
+            });
+            $('.addBtn').click(() => {
+                var record = $('.add_check').val();
+                $.ajax({
+                    url: 'add_check/',
+                    type: 'get',
+                    data: { title : record, own_url : sav_url},
+                    success: function(ret) {
+                        window.location.replace(own_url);
+                    }
+                });
+            });
+            $('.removeBtn').click(() => {
+                var id = $('#myUL input[type="checkbox"]:checked').map(function () {
+                    return $(this).val();
+                }).get();
+                $.ajax({
+                    url:'remove_checklist/',
+                    type: 'get',
+                    data: {id : id},
+                    success: function(res) {
+                        alert("Delete successful!")
+                        window.location.replace(own_url);
+                    } 
+                });
+            });
             $('#savedata').click(() => {
                 if(!id){                    
                     $.ajax({                        // all URLs are relative to http://localhost:3000/

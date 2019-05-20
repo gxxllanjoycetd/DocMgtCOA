@@ -20,32 +20,13 @@
         <article>
             <div id="myDIV" class="header">
                 <h2 style="margin:5px">Supporting Documentary Requirements</h2>
-                <input type="text" id="myInput" placeholder="Additional Requirements">
-                <span onclick="newElement()" class="addBtn">Add</span>
+                <input type="text" class="add_check" id="myInput" placeholder="Additional Requirements">
+                <span class="addBtn">Add</span>
+                <span class="removeBtn">Delete</span>
             </div>
 
             <ul id="myUL">
-                <li>Certificate of Availability of Funds issued by the Chief Accountant</li>
-                <li>Existence of lawful and sufficient allotment duly obligated as certified by authorized officials [except for government-owned and controlled corporations/government financing institutions (GOCCs/GFIs)]
-                </li>
-                <li>Legality of transaction and conformity with laws, rules or regulations</li>
-                <li>Approval of expenditure by Head of Office or his authorized representative</li>
-                <li>Sufficient and relevant documents to establish validity of claim</li>
-                <li>Office Order Travel Order approved in accordance with the provisions of Sections 1 and 2 of EO No. 459 dated September 1, 2005
-                </li>
-                <li>Duly approved itinerary of travel
-                </li>
-                <li>Letter of invitation of host/sponsoring country/agency/ organization</li>
-                <li>For plane fare, quotations of three travel agencies or its equivalent</li>
-                <li>Flight itinerary issued by the airline/ticketing office/travel agency</li>
-                <li>Copy of the United Nations Development Programme (UNDP) rate for the daily subsistence allowance (DSA) for the country of destination for the computation of DSA to be claimed</li>
-                <li>Document to show the dollar to peso exchange rate at the date of grant of cash advance</li>
-                <li>Where applicable, authority from the OP to claim representation expenses</li>
-                <li>In case of seminars/trainings, Invitation addressed to the agency inviting participants (issued by the foreign country)
-                </li>
-                <li>In case of seminars/trainings, Acceptance of the nominees as participants (issued by the foreign country)</li>
-                <li>In case of seminars/trainings, Programme Agenda and Logistics Information</li>
-                <li>Certification from the accountant that the previous cash advance has been liquidated and accounted for in the books</li>
+                
             </ul>
         </article>
         <nav>
@@ -91,7 +72,7 @@
                     </div>
                     <div>
                         <h4 style="margin:5px">Type of Transaction :</h4>
-                        <input style="width: 95%;" type="text" id="myInput" value="Foreign Travel - Granting of CA"  class="transaction_type">
+                        <input style="width: 95%;" type="text" id="myInput" value="Local Travel - Granting of CA"  class="transaction_type">
                     </div>
                     <div>
                         <h4 style="margin:5px">Submitted Documents :</h4>
@@ -115,18 +96,17 @@
             own_url = window.location.href;
             arr = own_url.split("=");
             id = arr[1];
-            arr2 = own_url.split("/")
+            arr2 = own_url.split("/");
             real_url = arr2[3]
-            arr3 = real_url.split("?")
-            sav_url =arr3[0]
-            //console.log(sav_url);
+            arr3 = real_url.split("?");
+            sav_url =arr3[0];
+            console.log(sav_url);
             if(id){
                 $.ajax({
                     url:'update_record/'+id,
                     type:'get',
                     dataType:'json',
                     success: function(ret){
-                        //console.log(ret['res']);
                         data=ret['res'];
                         $('.jev_num').val(data[0].jev_num);
                         $('.check_num').val(data[0].check_num);
@@ -139,10 +119,42 @@
                         $('.transaction_type').val(data[0].transaction_type);
                         $('.sub_doc').val(data[0].sub_doc);
                         $('.unsub_doc').val(data[0].unsub_doc);
-                        //$("#update_modal").modal('show');
                     }
                 })
             }
+            $.ajax({
+                url : 'read_check/',
+                type : 'get',
+                data : { own_url : sav_url},
+                success : function(ret) {
+                    $('#myUL').html(ret['res']);
+                }
+            });
+            $('.addBtn').click(() => {
+                var record = $('.add_check').val();
+                $.ajax({
+                    url: 'add_check/',
+                    type: 'get',
+                    data: { title : record, own_url : sav_url},
+                    success: function(ret) {
+                        window.location.replace(own_url);
+                    }
+                });
+            });
+            $('.removeBtn').click(() => {
+                var id = $('#myUL input[type="checkbox"]:checked').map(function () {
+                    return $(this).val();
+                }).get();
+                $.ajax({
+                    url:'remove_checklist/',
+                    type: 'get',
+                    data: {id : id},
+                    success: function(res) {
+                        alert("Delete successful!")
+                        window.location.replace(own_url);
+                    } 
+                });
+            });
             $('#savedata').click(() => {
                 if(!id){                    
                     $.ajax({                        // all URLs are relative to http://localhost:3000/
@@ -168,7 +180,6 @@
                         },
                     });
                 } else {
-                    //alert("update")
                     $.ajax({
                         url:"realupdate_record",
                         type:'get',

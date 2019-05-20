@@ -20,27 +20,13 @@
         <article>
             <div id="myDIV" class="header">
                 <h2 style="margin:5px">Supporting Documentary Requirements</h2>
-                <input type="text" id="myInput" placeholder="Additional Requirements">
-                <span onclick="newElement()" class="addBtn">Add</span>
+                <input type="text" class="add_check" id="myInput" placeholder="Additional Requirements">
+                <span class="addBtn">Add</span>
+                <span class="removeBtn">Delete</span>
             </div>
 
             <ul id="myUL">
-                <li>Certificate of Availability of Funds issued by the Chief Accountant</li>
-                <li>Existence of lawful and sufficient allotment duly obligated as certified by authorized officials [except for government-owned and controlled corporations/government financing institutions (GOCCs/GFIs)]
-                </li>
-                <li>Legality of transaction and conformity with laws, rules or regulations</li>
-                <li>Approval of expenditure by Head of Office or his authorized representative</li>
-                <li>Sufficient and relevant documents to establish validity of claim</li>
-                <li>Project parcellary survey plan showing that said lot and structures are within the boundaries of the right-of-way</li>
-                <li>Structural Mapping Plan of the lot affected</li>
-                <li>Certification by the implementing agency that the claim is not within the original ROW of a converted local road</li>
-                <li>Certification from the Head of the Implementing Office that there is no previous pending claim and previous payment on subject property</li>
-                <li>Environmental Clearance Certificate (ECC) as required under Section 8 of RA No. 8974</li>
-                <li>Copy of latest updated master list of Project-Affected-Persons (PAP) approved by Agency's authorized representative</li>
-                <li>In case of death of claimant or owner, judicial settlement duly advertised in a newspaper of general circulation</li>
-                <li>Certified photocopy of Court Decision registered with the Register of Deeds where the land is located including all annexes referred to in the court decision</li>
-                <li>Certified true copy of TCT for registered land, and TD in the name of the previous owner for unregistered land with court decision duly annotated</li>
-                <li>Certificate of Finality of Decision</li>
+
             </ul>
         </article>
         <nav>
@@ -110,11 +96,11 @@
             own_url = window.location.href;
             arr = own_url.split("=");
             id = arr[1];
-            arr2 = own_url.split("/")
+            arr2 = own_url.split("/");
             real_url = arr2[3]
-            arr3 = real_url.split("?")
-            sav_url =arr3[0]
-            //console.log(sav_url);
+            arr3 = real_url.split("?");
+            sav_url =arr3[0];
+            console.log(sav_url);
             if(id){
                 $.ajax({
                     url:'update_record/'+id,
@@ -138,6 +124,39 @@
                     }
                 })
             }
+            $.ajax({
+                url : 'read_check/',
+                type : 'get',
+                data : { own_url : sav_url},
+                success : function(ret) {
+                    $('#myUL').html(ret['res']);
+                }
+            });
+            $('.addBtn').click(() => {
+                var record = $('.add_check').val();
+                $.ajax({
+                    url: 'add_check/',
+                    type: 'get',
+                    data: { title : record, own_url : sav_url},
+                    success: function(ret) {
+                        window.location.replace(own_url);
+                    }
+                });
+            });
+            $('.removeBtn').click(() => {
+                var id = $('#myUL input[type="checkbox"]:checked').map(function () {
+                    return $(this).val();
+                }).get();
+                $.ajax({
+                    url:'remove_checklist/',
+                    type: 'get',
+                    data: {id : id},
+                    success: function(res) {
+                        alert("Delete successful!")
+                        window.location.replace(own_url);
+                    } 
+                });
+            });
             $('#savedata').click(() => {
                 if(!id){                    
                     $.ajax({                        // all URLs are relative to http://localhost:3000/

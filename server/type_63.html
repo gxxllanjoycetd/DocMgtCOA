@@ -20,43 +20,13 @@
         <article>
             <div id="myDIV" class="header">
                 <h2 style="margin:5px">Supporting Documentary Requirements</h2>
-                <input type="text" id="myInput" placeholder="Additional Requirements">
-                <span onclick="newElement()" class="addBtn">Add</span>
+                <input type="text" class="add_check" id="myInput" placeholder="Additional Requirements">
+                <span class="addBtn">Add</span>
+                <span class="removeBtn">Delete</span>
             </div>
 
             <ul id="myUL">
-                <li>Certificate of Availability of Funds issued by the Chief Accountant</li>
-                <li>Existence of lawful and sufficient allotment duly obligated as certified by authorized officials [except for government-owned and controlled corporations/government financing institutions (GOCCs/GFIs)]
-                </li>
-                <li>Legality of transaction and conformity with laws, rules or regulations</li>
-                <li>Approval of expenditure by Head of Office or his authorized representative</li>
-                <li>Sufficient and relevant documents to establish validity of claim</li>
-                <li>Authenticated photocopy of the approved APP and any amendment thereto</li>
-                <li>Approved contract supported by the documents which are required under COA Circular No. 2009-001 dated February 12, 2009 and COA Memorandum No. 2005-027 dated February 28, 2005 to be submitted to the Auditor 's Office within five days from
-                    the execution of the contract</li>
-                <li>Copy of Advertisement of Invitation to Bid/Request for expression of interest</li>
-                <li>Documentary requirements under Sections 23.l and 25.2.b for infrastructure projects, 23.1 and 25.2a for goods and 24.1 and 25.2c for consulting services, of the Revised IRR of RA No. 9184</li>
-                <li>Minutes of Pre-procurement Conference for projects costing above P5.0 million for infrastructure, P2.0 million ' and above for goods, and 1.0 million and above for consulting services</li>
-                <li>Bid Evaluation Report</li>
-                <li>Ranking of short listed bidders for consulting services</li>
-                <li>Post Qualification Evaluation Report</li>
-                <li>Printout copy of posting of Notice of Award, Notice to Proceed and Contract of award in the PhilGEPS</li>
-                <li>For LGUs, as clarified under COA Memorandum No. 2010-014 dated April 22, 2010, authorization by local Sanggunian for the Local Chief Executive to enter into contract in case of enacted budget</li>
-                <li>Evidence of Invitation of three observers in all stages of the procurement process pursuant to Section 13.1 of the Revised IRR of RA No. 9184</li>
-                <li>Request for purchase or requisition of supplies, materials and equipment duly approved by proper authorities</li>
-                <li>Letter request from contractors for advance/progress/final payment or for substitution in case of release of retention money
-                </li>
-                <li>Statement of Work Accomplished/Progress Billing</li>
-                <li>Inspection Report by the Agency's Authorized Engineer</li>
-                <li>Results of Test Analysis, if applicable</li>
-                <li>Statement of Time Elapsed</li>
-                <li>Monthly Certificate of Payment</li>
-                <li>Contractor's Affidavit on payment of laborers and materials</li>
-                <li>Pictures, before, during and after construction of items of work especially the embedded items</li>
-                <li>Photocopy of vouchers of all previous payments</li>
-                <li>Certificate of completion</li>
-                <li>Any security in the form of cash, bank guarantee, irrevocable standby letter of credit from a commercial bank, GSIS or surety bond callable on demand</li>
-                <li>Certification from the end-user that the project is completed and inspected</li>
+
             </ul>
         </article>
         <nav>
@@ -126,11 +96,11 @@
             own_url = window.location.href;
             arr = own_url.split("=");
             id = arr[1];
-            arr2 = own_url.split("/")
+            arr2 = own_url.split("/");
             real_url = arr2[3]
-            arr3 = real_url.split("?")
-            sav_url =arr3[0]
-            //console.log(sav_url);
+            arr3 = real_url.split("?");
+            sav_url =arr3[0];
+            console.log(sav_url);
             if(id){
                 $.ajax({
                     url:'update_record/'+id,
@@ -154,6 +124,39 @@
                     }
                 })
             }
+            $.ajax({
+                url : 'read_check/',
+                type : 'get',
+                data : { own_url : sav_url},
+                success : function(ret) {
+                    $('#myUL').html(ret['res']);
+                }
+            });
+            $('.addBtn').click(() => {
+                var record = $('.add_check').val();
+                $.ajax({
+                    url: 'add_check/',
+                    type: 'get',
+                    data: { title : record, own_url : sav_url},
+                    success: function(ret) {
+                        window.location.replace(own_url);
+                    }
+                });
+            });
+            $('.removeBtn').click(() => {
+                var id = $('#myUL input[type="checkbox"]:checked').map(function () {
+                    return $(this).val();
+                }).get();
+                $.ajax({
+                    url:'remove_checklist/',
+                    type: 'get',
+                    data: {id : id},
+                    success: function(res) {
+                        alert("Delete successful!")
+                        window.location.replace(own_url);
+                    } 
+                });
+            });
             $('#savedata').click(() => {
                 if(!id){                    
                     $.ajax({                        // all URLs are relative to http://localhost:3000/

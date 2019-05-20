@@ -20,39 +20,13 @@
         <article>
             <div id="myDIV" class="header">
                 <h2 style="margin:5px">Supporting Documentary Requirements</h2>
-                <input type="text" id="myInput" placeholder="Additional Requirements">
-                <span onclick="newElement()" class="addBtn">Add</span>
+                <input type="text" class="add_check" id="myInput" placeholder="Additional Requirements">
+                <span class="addBtn">Add</span>
+                <span class="removeBtn">Delete</span>
             </div>
 
             <ul id="myUL">
-                <li>Certificate of Availability of Funds issued by the Chief Accountant</li>
-                <li>Existence of lawful and sufficient allotment duly obligated as certified by authorized officials [except for government-owned and controlled corporations/government financing institutions (GOCCs/GFIs)]
-                </li>
-                <li>Legality of transaction and conformity with laws, rules or regulations</li>
-                <li>Approval of expenditure by Head of Office or his authorized representative</li>
-                <li>Sufficient and relevant documents to establish validity of claim</li>
-                <li>Approved Summary of Budgetary Requirements detailing the items of expenditure/disbursement to be incurred in the program/project
-                </li>
-                <li>List of priority projects which may be implemented by the NGO/PO published in the newspaper, agency website, bulletin board and the like</li>
-                <li>Accreditation of the NGO/PO by the Bids and Awards Committee (BAC) of the grantee agency</li>
-                <li>Results of evaluation of financial and technical capability of selected NGO/PO</li>
-                <li>Performance security for infrastructure project</li>
-                <li>NGO/PO proposal or application for funding</li>
-                <li>NGO/PO proposal attachment: Certificate of registration from Securities and Exchange Commission (SEC) or either Cooperative Development Authority (CDA) or Department of Labor and Employment (DOLE) as the case may be</li>
-                <li>NGO/PO proposal attachment: Authenticated copy of the latest Articles of Incorporation or Articles of Cooperation as the case may be, showing the original incorporators/organizers and the Secretary's certificate for incumbent officers,
-                    together with the Certificate of Filing with the SEC/Certificate of Approval by the CDA</li>
-                <li>NGO/PO proposal attachment: Audited financial reports for the past three years preceding the date of project implementation. For NGO/PO which has been in operation for less than three years, financial reports for the years in operation
-                    and proof of previous implementation of similar projects</li>
-                <li>NGO/PO proposal attachment: Disclosure of other related business, if any</li>
-                <li>NGO/PO proposal attachment: Work and Financial Plan (WFP), and sources and Details of Proponent's Equity Participation in the Project</li>
-                <li>NGO/PO proposal attachment: Complete project proposal approved/signed by officers</li>
-                <li>NGO/PO proposal attachment: List and/or photographs of similar projects previously completed, if any, indicating the source of funds for implementation</li>
-                <li>NGO/PO proposal attachment: Sworn affidavit of the secretary of the NGO/PO that none of its incorporators, organizers, directors or officers is an agent of or related by consanguinity or affinity up to the fourth civil degree to the official
-                    of the agency authorized to process and/or approve proposed MOA, and release funds</li>
-                <li>Document showing that NGO/PO has equity equivalent to 20 percent of the total project cost, which shall be in the form of labor, land for the project site, facilities, equipment and the like, to be used in the project</li>
-                <li>Certification from the Accountant that the previous cash advance granted to the NGO/PO has been liquidated, liquidation documents are post-audited and properly taken up in the books</li>
-                <li>Memorandum of Agreement (MOA)</li>
-                <li>Other relevant requirements under GPPB Resolution No. 12-2007 dated June 29, 2007</li>
+                
             </ul>
         </article>
         <nav>
@@ -122,11 +96,11 @@
             own_url = window.location.href;
             arr = own_url.split("=");
             id = arr[1];
-            arr2 = own_url.split("/")
+            arr2 = own_url.split("/");
             real_url = arr2[3]
-            arr3 = real_url.split("?")
-            sav_url =arr3[0]
-            //console.log(sav_url);
+            arr3 = real_url.split("?");
+            sav_url =arr3[0];
+            console.log(sav_url);
             if(id){
                 $.ajax({
                     url:'update_record/'+id,
@@ -150,6 +124,39 @@
                     }
                 })
             }
+            $.ajax({
+                url : 'read_check/',
+                type : 'get',
+                data : { own_url : sav_url},
+                success : function(ret) {
+                    $('#myUL').html(ret['res']);
+                }
+            });
+            $('.addBtn').click(() => {
+                var record = $('.add_check').val();
+                $.ajax({
+                    url: 'add_check/',
+                    type: 'get',
+                    data: { title : record, own_url : sav_url},
+                    success: function(ret) {
+                        window.location.replace(own_url);
+                    }
+                });
+            });
+            $('.removeBtn').click(() => {
+                var id = $('#myUL input[type="checkbox"]:checked').map(function () {
+                    return $(this).val();
+                }).get();
+                $.ajax({
+                    url:'remove_checklist/',
+                    type: 'get',
+                    data: {id : id},
+                    success: function(res) {
+                        alert("Delete successful!")
+                        window.location.replace(own_url);
+                    } 
+                });
+            });
             $('#savedata').click(() => {
                 if(!id){                    
                     $.ajax({                        // all URLs are relative to http://localhost:3000/

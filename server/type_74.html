@@ -20,45 +20,13 @@
         <article>
             <div id="myDIV" class="header">
                 <h2 style="margin:5px">Supporting Documentary Requirements</h2>
-                <input type="text" id="myInput" placeholder="Additional Requirements">
-                <span onclick="newElement()" class="addBtn">Add</span>
+                <input type="text" class="add_check" id="myInput" placeholder="Additional Requirements">
+                <span class="addBtn">Add</span>
+                <span class="removeBtn">Delete</span>
             </div>
 
             <ul id="myUL">
-                <li>Certificate of Availability of Funds issued by the Chief Accountant</li>
-                <li>Existence of lawful and sufficient allotment duly obligated as certified by authorized officials [except for government-owned and controlled corporations/government financing institutions (GOCCs/GFIs)]
-                </li>
-                <li>Legality of transaction and conformity with laws, rules or regulations</li>
-                <li>Approval of expenditure by Head of Office or his authorized representative</li>
-                <li>Sufficient and relevant documents to establish validity of claim</li>
-                <li>Purchase Order/Letter Order/Contract, duly approved by the official concerned and accepted by the supplier (date of acceptance must be clearly indicated, especially when the time or date of delivery is dependent on or will be counted from
-                    the date of acceptance of the purchase order/letter order/contract)</li>
-                <li>Proof of posting of invitation or request for submission of price quotation in the PhilGEPS website, website of the procuring agency, if available, and at any conspicuous place reserved for this purpose in the premises of the procuring
-                    agency for a period of seven calendar days in case of Shopping under Section 52.1(b), and Negotiated Procurement under Sections 53.1 (two failed bidding) and 53.9 (small value procurement) of the Revised IRR of RA No. 9184</li>
-                <li>Performance and warranty securities, except for shopping and negotiated procurement under emergency cases, small value procurement, lease of real property and United Nation (UN) agencies</li>
-                <li>BAC Resolution recommending and justifying to the Head of Procuring Entity (HOPE) the use of alternative mode of procurement and approval by the HOPE of the BAC Resolution recommending award of contract</li>
-                <li>Proof of posting of Notice of Award in the PhilGEPs website, the website of the procuring entity concerned, if available, and at any conspicuous place reserved for this purpose in the premises of the procuring entity</li>
-                <li>Approved Procurement Plan</li>
-                <li>Request for purchase or requisition of supplies, materials and equipment, duly approved by proper authorities</li>
-                <li>Original copy of the delivery invoice showing the quantity, description of the articles, unit and total value, duly signed by the dealer or his representative and indicating receipt by the proper agency official of items delivered</li>
-                <li>Inspection and acceptance report signed "Inspected by" by the authorized agency inspector and signed "accepted by" by the authorized end-user to whom the item was delivered or the property officer if item is for stock</li>
-                <li>Approval by the HOPE or his duly authorized representative on the use of the alternative methods of procurement, as recommended by the BAC</li>
-                <li>Statement of the prospective bidder that it is not blacklisted or barred from bidding by the Government or any of its agencies, offices, corporations or LGUs</li>
-                <li>Sworn affidavit of the bidder that it is not related to the HOPE by consanguinity or affinity up to the third civil degree
-                </li>
-                <li>In cases of two failed biddings, emergency cases, take-over of contract and small value procurement, Price quotation/bids/final offers from at least be three invited suppliers</li>
-                <li>In cases of two failed biddings, emergency cases, take-over of contract and small value procurement, Abstract of submitted Price Quotation</li>
-                <li>In cases of two failed biddings, emergency cases, take-over of contract and small value procurement, BAC Resolution recommending award of contract to Lowest Calculated Responsive Bid (LCRB)</li>
-                <li>In case of two failed biddings, Agency's offer for negotiations with selected suppliers, contractors or consultants</li>
-                <li>In case of two failed biddings, Certification of BAC on the failure of competitive bidding for the second time</li>
-                <li>In case of two failed biddings, Evidence of invitation of observers in all stages of the negotiation</li>
-                <li>In case of two failed biddings, Eligibility documents in case of infrastructure projects</li>
-                <li>In emergency cases, Justification as to the necessity of purchase</li>
-                <li>In case of take-over of contracts, Copy of terminated contract</li>
-                <li>In case of take-over of contracts, Reasons for the termination</li>
-                <li>In case of take-over of contracts, Negotiation document with the second lowest calculated bidder or the third lowest calculated bidder in case of failure of negotiation with the second lowest bidder. If negotiation still fails, invitation
-                    to at least three eligible contractors</li>
-                <li>In case of take-over of contracts, Approval by the Head of the Procuring Agency to negotiate contracts for projects under exceptional cases</li>
+
             </ul>
         </article>
         <nav>
@@ -128,11 +96,11 @@
             own_url = window.location.href;
             arr = own_url.split("=");
             id = arr[1];
-            arr2 = own_url.split("/")
+            arr2 = own_url.split("/");
             real_url = arr2[3]
-            arr3 = real_url.split("?")
-            sav_url =arr3[0]
-            //console.log(sav_url);
+            arr3 = real_url.split("?");
+            sav_url =arr3[0];
+            console.log(sav_url);
             if(id){
                 $.ajax({
                     url:'update_record/'+id,
@@ -156,6 +124,39 @@
                     }
                 })
             }
+            $.ajax({
+                url : 'read_check/',
+                type : 'get',
+                data : { own_url : sav_url},
+                success : function(ret) {
+                    $('#myUL').html(ret['res']);
+                }
+            });
+            $('.addBtn').click(() => {
+                var record = $('.add_check').val();
+                $.ajax({
+                    url: 'add_check/',
+                    type: 'get',
+                    data: { title : record, own_url : sav_url},
+                    success: function(ret) {
+                        window.location.replace(own_url);
+                    }
+                });
+            });
+            $('.removeBtn').click(() => {
+                var id = $('#myUL input[type="checkbox"]:checked').map(function () {
+                    return $(this).val();
+                }).get();
+                $.ajax({
+                    url:'remove_checklist/',
+                    type: 'get',
+                    data: {id : id},
+                    success: function(res) {
+                        alert("Delete successful!")
+                        window.location.replace(own_url);
+                    } 
+                });
+            });
             $('#savedata').click(() => {
                 if(!id){                    
                     $.ajax({                        // all URLs are relative to http://localhost:3000/

@@ -20,41 +20,13 @@
         <article>
             <div id="myDIV" class="header">
                 <h2 style="margin:5px">Supporting Documentary Requirements</h2>
-                <input type="text" id="myInput" placeholder="Additional Requirements">
-                <span onclick="newElement()" class="addBtn">Add</span>
+                <input type="text" class="add_check" id="myInput" placeholder="Additional Requirements">
+                <span class="addBtn">Add</span>
+                <span class="removeBtn">Delete</span>
             </div>
 
             <ul id="myUL">
-                <li>Certificate of Availability of Funds issued by the Chief Accountant</li>
-                <li>Existence of lawful and sufficient allotment duly obligated as certified by authorized officials [except for government-owned and controlled corporations/government financing institutions (GOCCs/GFIs)]
-                </li>
-                <li>Legality of transaction and conformity with laws, rules or regulations</li>
-                <li>Approval of expenditure by Head of Office or his authorized representative</li>
-                <li>Sufficient and relevant documents to establish validity of claim</li>
-                <li>Purchase Order/Letter Order/Contract, duly approved by the official concerned and accepted by the supplier (date of acceptance must be clearly indicated, especially when the time or date of delivery is dependent on or will be counted from
-                    the date of acceptance of the purchase order/letter order/contract)</li>
-                <li>Proof of posting of invitation or request for submission of price quotation in the PhilGEPS website, website of the procuring agency, if available, and at any conspicuous place reserved for this purpose in the premises of the procuring
-                    agency for a period of seven calendar days in case of Shopping under Section 52.1(b), and Negotiated Procurement under Sections 53.1 (two failed bidding) and 53.9 (small value procurement) of the Revised IRR of RA No. 9184</li>
-                <li>Performance and warranty securities, except for shopping and negotiated procurement under emergency cases, small value procurement, lease of real property and United Nation (UN) agencies</li>
-                <li>BAC Resolution recommending and justifying to the Head of Procuring Entity (HOPE) the use of alternative mode of procurement and approval by the HOPE of the BAC Resolution recommending award of contract</li>
-                <li>Proof of posting of Notice of Award in the PhilGEPs website, the website of the procuring entity concerned, if available, and at any conspicuous place reserved for this purpose in the premises of the procuring entity</li>
-                <li>Approved Procurement Plan</li>
-                <li>Request for purchase or requisition of supplies, materials and equipment, duly approved by proper authorities</li>
-                <li>Original copy of the delivery invoice showing the quantity, description of the articles, unit and total value, duly signed by the dealer or his representative and indicating receipt by the proper agency official of items delivered</li>
-                <li>Inspection and acceptance report signed "Inspected by" by the authorized agency inspector and signed "accepted by" by the authorized end-user to whom the item was delivered or the property officer if item is for stock</li>
-                <li>Approval by the HOPE or his duly authorized representative on the use of the alternative methods of procurement, as recommended by the BAC</li>
-                <li>Statement of the prospective bidder that it is not blacklisted or barred from bidding by the Government or any of its agencies, offices, corporations or LGUs</li>
-                <li>Sworn affidavit of the bidder that it is not related to the HOPE by consanguinity or affinity up to the third civil degree
-                </li>
-                <li>Copy of direct invitation to bid served by the concerned agency to all suppliers or consultants appearing in the pre-selected list of manufacturers/suppliers/distributors with known experience and proven capability on the requirements
-                    of the particular contract</li>
-                <li>Winning bidder's offer or proposal</li>
-                <li>Abstract of bids showing the most responsive and complying bidder from among the other bidders who participated in the bidding
-                </li>
-                <li>Notice of Award</li>
-                <li>Documentary requirements under Sections 23. l and 25.2(a) for goods, 23.1 and 25.2(b) for infrastructure, 25.1 and 25.2(c) for consultancy services, of the Revised IRR of RA No. 9184</li>
-                <li>Such other documents peculiar to the contract and/or to the mode of procurement and considered necessary in the auditorial review and in the technical evaluation thereof</li>
-                <li>Bid security (required under Section 54.4 IRR-A, RA No. 9184)</li>
+
             </ul>
         </article>
         <nav>
@@ -124,11 +96,11 @@
             own_url = window.location.href;
             arr = own_url.split("=");
             id = arr[1];
-            arr2 = own_url.split("/")
+            arr2 = own_url.split("/");
             real_url = arr2[3]
-            arr3 = real_url.split("?")
-            sav_url =arr3[0]
-            //console.log(sav_url);
+            arr3 = real_url.split("?");
+            sav_url =arr3[0];
+            console.log(sav_url);
             if(id){
                 $.ajax({
                     url:'update_record/'+id,
@@ -152,6 +124,39 @@
                     }
                 })
             }
+            $.ajax({
+                url : 'read_check/',
+                type : 'get',
+                data : { own_url : sav_url},
+                success : function(ret) {
+                    $('#myUL').html(ret['res']);
+                }
+            });
+            $('.addBtn').click(() => {
+                var record = $('.add_check').val();
+                $.ajax({
+                    url: 'add_check/',
+                    type: 'get',
+                    data: { title : record, own_url : sav_url},
+                    success: function(ret) {
+                        window.location.replace(own_url);
+                    }
+                });
+            });
+            $('.removeBtn').click(() => {
+                var id = $('#myUL input[type="checkbox"]:checked').map(function () {
+                    return $(this).val();
+                }).get();
+                $.ajax({
+                    url:'remove_checklist/',
+                    type: 'get',
+                    data: {id : id},
+                    success: function(res) {
+                        alert("Delete successful!")
+                        window.location.replace(own_url);
+                    } 
+                });
+            });
             $('#savedata').click(() => {
                 if(!id){                    
                     $.ajax({                        // all URLs are relative to http://localhost:3000/
