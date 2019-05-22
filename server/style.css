@@ -15,7 +15,6 @@ article {
     padding: 20px;
     width: 63%;
     background-color: #f1f1f1;
-    height: 300px;
 }
 
 section:after {
@@ -39,14 +38,19 @@ body {
 
 /* Remove margins and padding from the list */
 
+
+/*
 ul {
     margin: 0;
     padding: 0;
 }
+*/
 
 
 /* Style the list items */
 
+
+/*
 ul li {
     cursor: pointer;
     position: relative;
@@ -56,38 +60,53 @@ ul li {
     font-size: 16px;
     transition: 0.2s;
     /* make the list items unselectable */
+
+
+/*
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
 }
+*/
 
 
 /* Set all odd list items to a different color (zebra-stripes) */
 
+
+/*
 ul li:nth-child(odd) {
     background: #f9f9f9;
 }
+*/
 
 
 /* Darker background-color on hover */
 
+
+/*
 ul li:hover {
     background: #ddd;
 }
+*/
 
 
 /* When clicked on, add a background color and strike out text */
 
+
+/*
 ul li.checked {
     background: #888;
     color: #fff;
     text-decoration: line-through;
 }
+*/
 
 
 /* Add a "checked" mark when clicked on */
 
+
+/*
 ul li.checked::before {
     content: '';
     position: absolute;
@@ -100,10 +119,13 @@ ul li.checked::before {
     height: 15px;
     width: 7px;
 }
+*/
 
 
 /* Style the close button */
 
+
+/*
 .close {
     position: absolute;
     right: 0;
@@ -115,6 +137,7 @@ ul li.checked::before {
     background-color: #36def4;
     color: white;
 }
+*/
 
 
 /* Style the header */
@@ -218,4 +241,114 @@ input {
 #myUL input {
     float: right;
     margin-right: -35%;
+}
+
+.form-style-1 {
+    margin: 10px auto;
+    max-width: 400px;
+    padding: 20px 12px 10px 20px;
+    font: 13px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+.form-style-1 li {
+    padding: 0;
+    display: block;
+    list-style: none;
+    margin: 10px 0 0 0;
+}
+
+.form-style-1 label {
+    margin: 0 0 3px 0;
+    padding: 0px;
+    display: block;
+    font-weight: bold;
+}
+
+.form-style-1 input[type=text],
+.form-style-1 input[type=date],
+.form-style-1 input[type=datetime],
+.form-style-1 input[type=number],
+.form-style-1 input[type=search],
+.form-style-1 input[type=time],
+.form-style-1 input[type=url],
+.form-style-1 input[type=email],
+textarea,
+select {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    border: 1px solid #BEBEBE;
+    padding: 7px;
+    margin: 0px;
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+    outline: none;
+}
+
+.form-style-1 input[type=text]:focus,
+.form-style-1 input[type=date]:focus,
+.form-style-1 input[type=datetime]:focus,
+.form-style-1 input[type=number]:focus,
+.form-style-1 input[type=search]:focus,
+.form-style-1 input[type=time]:focus,
+.form-style-1 input[type=url]:focus,
+.form-style-1 input[type=email]:focus,
+.form-style-1 textarea:focus,
+.form-style-1 select:focus {
+    -moz-box-shadow: 0 0 8px #88D5E9;
+    -webkit-box-shadow: 0 0 8px #88D5E9;
+    box-shadow: 0 0 8px #88D5E9;
+    border: 1px solid #88D5E9;
+}
+
+.form-style-1 .field-divided {
+    width: 49%;
+}
+
+.form-style-1 .field-long {
+    width: 100%;
+}
+
+.form-style-1 .field-select {
+    width: 100%;
+}
+
+.form-style-1 .field-textarea {
+    height: 100px;
+}
+
+.form-style-1 input[type=submit],
+.form-style-1 input[type=button] {
+    background: #4B99AD;
+    padding: 8px 15px 8px 15px;
+    border: none;
+    color: #fff;
+}
+
+.form-style-1 input[type=submit]:hover,
+.form-style-1 input[type=button]:hover {
+    background: #4691A4;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+.form-style-1 .required {
+    color: red;
+}
+
+.column {
+    float: left;
+    width: 50%;
+}
+
+
+/* Clear floats after the columns */
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
 }

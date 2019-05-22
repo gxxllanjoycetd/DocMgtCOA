@@ -17,37 +17,28 @@
         <center>Repeat Order</center>
     </div>
     <section>
-        <article>
-            <div id="myDIV" class="header">
-                <h2 style="margin:5px">Supporting Documentary Requirements</h2>
-                <input type="text" class="add_check" id="myInput" placeholder="Additional Requirements">
-                <span class="addBtn">Add</span>
-                <span class="removeBtn">Delete</span>
-            </div>
-
-            <ul id="myUL">
-
-            </ul>
-        </article>
-        <nav>
-            <div>
-                <form style="font-size: 18px; " >
+        <nav style="width: 100%; background: #47d8eb">
+            <div class="column" style="width: 21.5%">
+                <form style="font-size: 18px; ">
                     <div>
                         <h4 style="margin:5px">JEV Number :</h4>
                         <input style="width: 95%;" type="text" id="myInput" placeholder="Enter JEV No." class="jev_num">
                     </div>
+                    <br><br>
                     <div>
                         <h4 style="margin:5px">Check Number :</h4>
                         <input style="width: 95%;" type="text" id="myInput" placeholder="Enter Check No." class="check_num">
                     </div>
+                    <br><br>
                     <div>
                         <h4 style="margin:5px">Amount</h4>
                         <input style="width: 95%;" type="text" id="myInput" placeholder="Enter Amount" class="amount">
                     </div>
+                    <br><br>
                     <div>
                         <h4 style="margin:5px">Status</h4>
                     </div>
-                    <div class="styled-select slate" style="width: 300px">
+                    <div class="styled-select slate" style="width: 100%">
                         <select id="sel_opt" class="status">
                             <option value="Submitted" class="status">Submitted</option>
                             <option value="Unsubmitted" class="status">Unsubmitted</option>
@@ -62,29 +53,80 @@
                         <h4 style="margin:5px">Date of Voucher :</h4>
                         <input style="width: 95%;" type="text" id="myInput" placeholder="Enter Date of Voucher" class="voucher_date">
                     </div>
+                </form>
+            </div>
+            <div class="column" style="width: 78.5%">
+                <form style="font-size: 18px; ">
                     <div>
                         <h4 style="margin:5px">Payee :</h4>
                         <input style="width: 95%;" type="text" id="myInput" placeholder="Enter Payee" class="payee">
                     </div>
+                    <br><br>
                     <div>
                         <h4 style="margin:5px">Source of Fund :</h4>
                         <input style="width: 95%;" type="text" id="myInput" placeholder="Enter Source of Fund" class="source_fund">
                     </div>
+                    <br><br>
                     <div>
                         <h4 style="margin:5px">Type of Transaction :</h4>
-                        <input style="width: 95%;" type="text" id="myInput" value="Repeat Order"  class="transaction_type">
+                        <input style="width: 95%;" type="text" id="myInput" value="Repeat Order" class="transaction_type">
                     </div>
                     <div>
-                        <h4 style="margin:5px">Submitted Documents :</h4>
-                        <input style="width: 95%;" type="text" id="myInput" placeholder="List" class="sub_doc">
+                        <h4 style="margin:5px">Accountant/Brgy./Office :</h4>
+                        <input style="width: 95%;" type="text" id="myInput" placeholder="Accountant /  Baranggay / Office" class="sub_doc">
                     </div>
+                    <br><br>
                     <div>
-                        <h4 style="margin:5px">Unsubmitted Documents :</h4>
-                        <input style="width: 95%;" type="text" id="myInput" placeholder="List" class="unsub_doc">
+                        <h4 style="margin:5px">Notes :</h4>
+                        <input style="width: 95%;" type="text" id="myInput" placeholder="Notes" class="unsub_doc">
                     </div>
                     <br><br><br>
-                    <button type="submit " form="form1 " value="Submit " id="savedata">SAVE</button>
+                    <button style="padding: 10px; width: 12.5%; background: #d9d9d9; color: #555; float: left; text-align: center; font-size: 16px; cursor: pointer; transition: 0.3s; border-radius: 0;" type="submit " form="form1 " value="Submit " id="savedata">SAVE</button>
                 </form>
+            </div>
+        </nav>
+    </section>
+    <br>
+    <section>
+        <article>
+            <div id="myDIV" class="header">
+                <h2 style="margin:5px">Submitted Supporting Documentary Requirements</h2>
+                <input type="text" class="add_check" id="myInput" placeholder="Submitted Requirements">
+                <span class="addBtn">Add</span>
+                <span class="removeBtn">Delete</span>
+            </div>
+
+            <ul id="myUL">
+
+            </ul>
+        </article>
+        <nav>
+            <div>
+                <h2>Supporting Documentary Requirements</h2>
+                <li>Certificate of Availability of Funds issued by the Chief Accountant</li>
+                <li>Existence of lawful and sufficient allotment duly obligated as certified by authorized officials [except for government-owned and controlled corporations/government financing institutions (GOCCs/GFIs)]
+                </li>
+                <li>Legality of transaction and conformity with laws, rules or regulations</li>
+                <li>Approval of expenditure by Head of Office or his authorized representative</li>
+                <li>Sufficient and relevant documents to establish validity of claim</li>
+                <li>Purchase Order/Letter Order/Contract, duly approved by the official concerned and accepted by the supplier (date of acceptance must be clearly indicated, especially when the time or date of delivery is dependent on or will be counted from
+                    the date of acceptance of the purchase order/letter order/contract)</li>
+                <li>Proof of posting of invitation or request for submission of price quotation in the PhilGEPS website, website of the procuring agency, if available, and at any conspicuous place reserved for this purpose in the premises of the procuring
+                    agency for a period of seven calendar days in case of Shopping under Section 52.1(b), and Negotiated Procurement under Sections 53.1 (two failed bidding) and 53.9 (small value procurement) of the Revised IRR of RA No. 9184</li>
+                <li>Performance and warranty securities, except for shopping and negotiated procurement under emergency cases, small value procurement, lease of real property and United Nation (UN) agencies</li>
+                <li>BAC Resolution recommending and justifying to the Head of Procuring Entity (HOPE) the use of alternative mode of procurement and approval by the HOPE of the BAC Resolution recommending award of contract</li>
+                <li>Proof of posting of Notice of Award in the PhilGEPs website, the website of the procuring entity concerned, if available, and at any conspicuous place reserved for this purpose in the premises of the procuring entity</li>
+                <li>Approved Procurement Plan</li>
+                <li>Request for purchase or requisition of supplies, materials and equipment, duly approved by proper authorities</li>
+                <li>Original copy of the delivery invoice showing the quantity, description of the articles, unit and total value, duly signed by the dealer or his representative and indicating receipt by the proper agency official of items delivered
+                </li>
+                <li>Inspection and acceptance report signed "Inspected by" by the authorized agency inspector and signed "accepted by" by the authorized end-user to whom the item was delivered or the property officer if item is for stock</li>
+                <li>Approval by the HOPE or his duly authorized representative on the use of the alternative methods of procurement, as recommended by the BAC</li>
+                <li>Statement of the prospective bidder that it is not blacklisted or barred from bidding by the Government or any of its agencies, offices, corporations or LGUs</li>
+                <li>Sworn affidavit of the bidder that it is not related to the HOPE by consanguinity or affinity up to the third civil degree
+                </li>
+                <li>Copy of the original contract used as basis for repeat order indicating that the original contract was awarded through public bidding</li>
+                <li>Certification from the Purchasing Department/Office that the supplier has complied with all the requirements under the original contract</li>
             </div>
         </nav>
     </section>
@@ -99,16 +141,16 @@
             arr2 = own_url.split("/");
             real_url = arr2[3]
             arr3 = real_url.split("?");
-            sav_url =arr3[0];
+            sav_url = arr3[0];
             console.log(sav_url);
-            if(id){
+            if (id) {
                 $.ajax({
-                    url:'update_record/'+id,
-                    type:'get',
-                    dataType:'json',
-                    success: function(ret){
+                    url: 'update_record/' + id,
+                    type: 'get',
+                    dataType: 'json',
+                    success: function(ret) {
                         //console.log(ret['res']);
-                        data=ret['res'];
+                        data = ret['res'];
                         $('.jev_num').val(data[0].jev_num);
                         $('.check_num').val(data[0].check_num);
                         $('.amount').val(data[0].amount);
@@ -125,10 +167,12 @@
                 })
             }
             $.ajax({
-                url : 'read_check/',
-                type : 'get',
-                data : { own_url : sav_url},
-                success : function(ret) {
+                url: 'read_check/',
+                type: 'get',
+                data: {
+                    own_url: sav_url
+                },
+                success: function(ret) {
                     $('#myUL').html(ret['res']);
                 }
             });
@@ -137,76 +181,81 @@
                 $.ajax({
                     url: 'add_check/',
                     type: 'get',
-                    data: { title : record, own_url : sav_url},
+                    data: {
+                        title: record,
+                        own_url: sav_url
+                    },
                     success: function(ret) {
                         window.location.replace(own_url);
                     }
                 });
             });
             $('.removeBtn').click(() => {
-                var id = $('#myUL input[type="checkbox"]:checked').map(function () {
+                var id = $('#myUL input[type="checkbox"]:checked').map(function() {
                     return $(this).val();
                 }).get();
                 $.ajax({
-                    url:'remove_checklist/',
+                    url: 'remove_checklist/',
                     type: 'get',
-                    data: {id : id},
+                    data: {
+                        id: id
+                    },
                     success: function(res) {
                         alert("Delete successful!")
                         window.location.replace(own_url);
-                    } 
+                    }
                 });
             });
             $('#savedata').click(() => {
-                if(!id){                    
-                    $.ajax({                        // all URLs are relative to http://localhost:3000/
-                url: 'insert_record',
+                if (!id) {
+                    $.ajax({ // all URLs are relative to http://localhost:3000/
+                        url: 'insert_record',
                         type: 'get',
-                dataType: 'json',
-                data: {
-                        jev_num: $('.jev_num').val(),
-                        check_num: $('.check_num').val(),
-                        amount: $('.amount').val(),
-                        status: $('#sel_opt').val(),
-                        voucher_num: $('.voucher_num').val(),
-                        voucher_date: $('.voucher_date').val(),
-                        payee: $('.payee').val(),
-                        source_fund: $('.source_fund').val(),
-                        transaction_type: $('.transaction_type').val(),
-                        sub_doc: $('.sub_doc').val(),
-                                unsub_doc: $('.unsub_doc').val(),
-                                own_url:sav_url
-                },
-                success: (data) => {
+                        dataType: 'json',
+                        data: {
+                            jev_num: $('.jev_num').val(),
+                            check_num: $('.check_num').val(),
+                            amount: $('.amount').val(),
+                            status: $('#sel_opt').val(),
+                            voucher_num: $('.voucher_num').val(),
+                            voucher_date: $('.voucher_date').val(),
+                            payee: $('.payee').val(),
+                            source_fund: $('.source_fund').val(),
+                            transaction_type: $('.transaction_type').val(),
+                            sub_doc: $('.sub_doc').val(),
+                            unsub_doc: $('.unsub_doc').val(),
+                            own_url: sav_url
+                        },
+                        success: (data) => {
                             window.location.replace("http://localhost:3000");
                         },
                     });
                 } else {
                     //alert("update")
                     $.ajax({
-                        url:"realupdate_record",
-                        type:'get',
-                        dataType:'json',
+                        url: "realupdate_record",
+                        type: 'get',
+                        dataType: 'json',
                         data: {
-                                jev_id: id,
-                                jev_num: $('.jev_num').val(),
-                                check_num: $('.check_num').val(),
-                                amount: $('.amount').val(),
-                                status: $('#sel_opt').val(),
-                                voucher_num: $('.voucher_num').val(),
-                                voucher_date: $('.voucher_date').val(),
-                                payee: $('.payee').val(),
-                                source_fund: $('.source_fund').val(),
-                                transaction_type: $('.transaction_type').val(),
-                                sub_doc: $('.sub_doc').val(),
-                                unsub_doc: $('.unsub_doc').val(),
-                                own_url:sav_url
-                },
+                            jev_id: id,
+                            jev_num: $('.jev_num').val(),
+                            check_num: $('.check_num').val(),
+                            amount: $('.amount').val(),
+                            status: $('#sel_opt').val(),
+                            voucher_num: $('.voucher_num').val(),
+                            voucher_date: $('.voucher_date').val(),
+                            payee: $('.payee').val(),
+                            source_fund: $('.source_fund').val(),
+                            transaction_type: $('.transaction_type').val(),
+                            sub_doc: $('.sub_doc').val(),
+                            unsub_doc: $('.unsub_doc').val(),
+                            own_url: sav_url
+                        },
                         success: function(ret) {
                             console.log("update success")
                             window.location.replace("http://localhost:3000");
-                        } 
-                });
+                        }
+                    });
                 }
             });
         });
