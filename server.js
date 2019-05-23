@@ -31,12 +31,13 @@ db.serialize(function() {
         [unsub_doc] TEXT(100),
         [own_url] TEXT(100) )`);
 });
-//-------------- create checklist table -------------
+//-------------- create checklists table -------------
 db.serialize(function() {
-    db.run(`CREATE TABLE IF NOT EXISTS checklist ( 
+    db.run(`CREATE TABLE IF NOT EXISTS checklists ( 
         [check_id] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
         [title] TEXT(100) NOT NULL,                
-        [own_url] TEXT(100) )`);
+        [own_url] TEXT(100),
+        [jev_id] TEXT(100) )`);
 });
 //------------- insert record --------------
 app.get('/insert_record',(req,res) => {
@@ -108,23 +109,18 @@ app.get('/generate_report/:id',(req,res) => {
     })
 });
 
-//-------------get checklist data ---------
+//-------------get checklists data ---------
 app.get('/read_check',(req,res) => {
     const own_url = req.query.own_url ;
-    var query = 'SELECT * FROM checklist WHERE own_url = '+ '"'+own_url+'"';
+    const jev_id = req.query.jev_id;
+    var query = 'SELECT * FROM checklists WHERE own_url = '+ '"'+own_url+'" AND jev_id = '+ '"'+jev_id+'"';
     db.all( query, function(err,rows) {
         if(err){
             console.log("can not read")
         } else if(rows) {
-            //console.log(rows.len)
             retStr = '';
             for(i=0;i<rows.length;i++){
-                
-                // retStr += '<li>';
-                // retStr += rows[i]['title'];
-                // retStr += '<span class="close"></span></li>';
                 retStr += '<li>';
-                // retStr +='<span>'+ rows[i]['title'] +'</span>';
                 retStr +=  rows[i]['title'];
                 retStr += '<input style="align-text:right;" type="checkbox" value="'+rows[i].check_id+'"/></li>';
             }
@@ -133,10 +129,10 @@ app.get('/read_check',(req,res) => {
     })
 });
 
-//------------- insert checklist --------------
+//------------- insert checklists --------------
 app.get('/add_check',(req,res) => {
-    query = `INSERT INTO checklist ( title,own_url ) VALUES 
-            ( '`+req.query.title+`' ,'`+req.query.own_url+`')`;
+    query = `INSERT INTO checklists ( title,own_url,jev_id ) VALUES 
+            ( '`+req.query.title+`' ,'`+req.query.own_url+`','`+req.query.jev_id+`')`;
     db.run( query,function(err, row){
             if(err){
                 console.log("fail to insert check");
@@ -147,11 +143,11 @@ app.get('/add_check',(req,res) => {
     );
     
 });
-//-------------- delete checklist --------------
+//-------------- delete checklists --------------
 app.get('/remove_checklist',(req,res) => {
     const check_id = req.query.id ;
     del_id = check_id[0];
-    var query = 'DELETE FROM checklist WHERE check_id='+ del_id;
+    var query = 'DELETE FROM checklists WHERE check_id='+ del_id;
     db.run(query,function(err) {
         if(err){
             console.log("can not delete")

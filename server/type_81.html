@@ -20,6 +20,10 @@
         <nav style="width: 100%; background: #47d8eb">
             <div class="column" style="width: 21.5%">
                 <form style="font-size: 18px; ">
+                    <div style="display:none;">
+                        <h4 style="margin:5px">JEV Id</h4>
+                        <input style="width: 95%;" type="text" id="myInput" placeholder="Enter Id" class="jev_id">
+                    </div>
                     <div>
                         <h4 style="margin:5px">JEV Number :</h4>
                         <input style="width: 95%;" type="text" id="myInput" placeholder="Enter JEV No." class="jev_num">
@@ -145,6 +149,7 @@
                     success: function(ret) {
                         //console.log(ret['res']);
                         data = ret['res'];
+                        $('.jev_id').val(data[0].jev_id);
                         $('.jev_num').val(data[0].jev_num);
                         $('.check_num').val(data[0].check_num);
                         $('.amount').val(data[0].amount);
@@ -164,7 +169,8 @@
                 url: 'read_check/',
                 type: 'get',
                 data: {
-                    own_url: sav_url
+                    own_url: sav_url,
+                    jev_id: id
                 },
                 success: function(ret) {
                     $('#myUL').html(ret['res']);
@@ -172,12 +178,18 @@
             });
             $('.addBtn').click(() => {
                 var record = $('.add_check').val();
+                var jev_id = $('.jev_id').val();
+                if (!id) {
+                    alert("Can not input transactions without JEV record !");
+                    //window.location.replace(own_url);
+                }
                 $.ajax({
                     url: 'add_check/',
                     type: 'get',
                     data: {
                         title: record,
-                        own_url: sav_url
+                        own_url: sav_url,
+                        jev_id: jev_id
                     },
                     success: function(ret) {
                         window.location.replace(own_url);
