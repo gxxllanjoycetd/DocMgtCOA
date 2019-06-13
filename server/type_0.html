@@ -26,68 +26,72 @@
             </div>
 
             <ul id="myUL">
-                
+
             </ul>
         </article>
         <nav>
             <div>
-                <form style="font-size: 18px; " >
-                    <div style="display:none;">
-                        <h4 style="margin:5px">JEV Id</h4>
-                        <input style="width: 95%;" type="text" id="myInput" placeholder="Enter Id" class="jev_id">
-                    </div>
-                    <div>
-                        <h4 style="margin:5px">JEV Number :</h4>
-                        <input style="width: 95%;" type="text" id="myInput" placeholder="Enter JEV No." class="jev_num">
-                    </div>
-                    <div>
-                        <h4 style="margin:5px">Check Number :</h4>
-                        <input style="width: 95%;" type="text" id="myInput" placeholder="Enter Check No." class="check_num">
-                    </div>
-                    <div>
-                        <h4 style="margin:5px">Amount</h4>
-                        <input style="width: 95%;" type="text" id="myInput" placeholder="Enter Amount" class="amount">
-                    </div>
-                    <div>
-                        <h4 style="margin:5px">Status</h4>
-                    </div>
-                    <div class="styled-select slate" style="width: 300px">
-                        <select id="sel_opt" class="status">
+                <form name="theform" style="font-size: 18px; ">
+                    <fieldset>
+                        <div style="display:none;">
+                            <h4 style="margin:5px">JEV Id</h4>
+                            <input style="width: 95%;" type="text" id="myInput" placeholder="Enter Id" class="jev_id">
+                        </div>
+                        <div>
+                            <h4 style="margin:5px">JEV Number :</h4>
+                            <input style="width: 95%;" type="text" id="myInput" placeholder="Enter JEV No." class="jev_num">
+                        </div>
+                        <div>
+                            <h4 style="margin:5px">Check Number :</h4>
+                            <input style="width: 95%;" type="text" id="myInput" placeholder="Enter Check No." class="check_num">
+                        </div>
+                        <div>
+                            <h4 style="margin:5px">Amount</h4>
+                            <input style="width: 95%;" type="text" id="myInput" placeholder="Enter Amount" class="amount">
+                        </div>
+                        <div>
+                            <h4 style="margin:5px">Status</h4>
+                        </div>
+                        <div class="styled-select slate" style="width: 300px">
+                            <select id="sel_opt" class="status">
                             <option value="Submitted" class="status">Submitted</option>
                             <option value="Unsubmitted" class="status">Unsubmitted</option>
                             <option value="Cancelled" class="status">Cancelled</option>
                         </select>
-                    </div>
-                    <div>
-                        <h4 style="margin:5px">Voucher Number :</h4>
-                        <input style="width: 95%;" type="text" id="myInput" placeholder="Enter Voucher No." class="voucher_num">
-                    </div>
-                    <div>
-                        <h4 style="margin:5px">Date of Voucher :</h4>
-                        <input style="width: 95%;" type="text" id="myInput" placeholder="Enter Date of Voucher" class="voucher_date">
-                    </div>
-                    <div>
-                        <h4 style="margin:5px">Payee :</h4>
-                        <input style="width: 95%;" type="text" id="myInput" placeholder="Enter Payee" class="payee">
-                    </div>
-                    <div>
-                        <h4 style="margin:5px">Source of Fund :</h4>
-                        <input style="width: 95%;" type="text" id="myInput" placeholder="Enter Source of Fund" class="source_fund">
-                    </div>
-                    <div>
-                        <h4 style="margin:5px">Type of Transaction :</h4>
-                        <input style="width: 95%;" type="text" id="myInput" value="Miscellaneous"  class="transaction_type">
-                    </div>
-                    <div>
-                        <h4 style="margin:5px">Submitted Documents :</h4>
-                        <input style="width: 95%;" type="text" id="myInput" placeholder="List" class="sub_doc">
-                    </div>
-                    <div>
-                        <h4 style="margin:5px">Unsubmitted Documents :</h4>
-                        <input style="width: 95%;" type="text" id="myInput" placeholder="List" class="unsub_doc">
-                    </div>
-                    <br><br><br>
-                    <button type="submit " form="form1 " value="Submit " id="savedata">SAVE</button>
+                        </div>
+                        <div>
+                            <h4 style="margin:5px">Voucher Number :</h4>
+                            <input style="width: 95%;" type="text" id="myInput" placeholder="Enter Voucher No." class="voucher_num">
+                        </div>
+                        <div>
+                            <h4 style="margin:5px">Date of Voucher :</h4>
+                            <input style="width: 95%;" type="text" id="myInput" placeholder="Enter Date of Voucher" class="voucher_date">
+                        </div>
+                        <div>
+                            <h4 style="margin:5px">Payee :</h4>
+                            <input style="width: 95%;" type="text" id="myInput" placeholder="Enter Payee" class="payee">
+                        </div>
+                        <div>
+                            <h4 style="margin:5px">Source of Fund :</h4>
+                            <input style="width: 95%;" type="text" id="myInput" placeholder="Enter Source of Fund" class="source_fund">
+                        </div>
+                        <div>
+                            <h4 style="margin:5px">Type of Transaction :</h4>
+                            <input style="width: 95%;" type="text" id="myInput" value="Miscellaneous" class="transaction_type">
+                        </div>
+                        <div>
+                            <h4 style="margin:5px">Submitted Documents :</h4>
+                            <input style="width: 95%;" type="text" id="myInput" placeholder="List" class="sub_doc">
+                        </div>
+                        <div>
+                            <h4 style="margin:5px">Unsubmitted Documents :</h4>
+                            <input style="width: 95%;" type="text" id="myInput" placeholder="List" class="unsub_doc">
+                        </div>
+
+                        <br><br><br>
+                        <button type="submit " form="form1 " value="Submit " id="savedata">SAVE</button>
+                        <!--disabled="disabled"-->
+                    </fieldset>
                 </form>
             </div>
         </nav>
@@ -96,6 +100,19 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="checklist.js"></script>
     <script type="text/javascript">
+        //function checkform() {
+        //    var f = document.forms["theform"].elements;
+        //    var cansubmit = true;
+
+        //    for (var i = 0; i < f.length; i++) {
+        //        if ("value" in f[i] && f[i].value.length == 0)
+        //            cansubmit = false;
+        //    }
+
+        //    document.getElementById('savedata').disabled = !cansubmit;
+        //}
+        //window.onload = checkform;
+
         $(document).ready(() => {
 
             own_url = window.location.href;
@@ -104,15 +121,15 @@
             arr2 = own_url.split("/");
             real_url = arr2[3]
             arr3 = real_url.split("?");
-            sav_url =arr3[0];
+            sav_url = arr3[0];
             console.log(sav_url);
-            if(id){
+            if (id) {
                 $.ajax({
-                    url:'update_record/'+id,
-                    type:'get',
-                    dataType:'json',
-                    success: function(ret){
-                        data=ret['res'];
+                    url: 'update_record/' + id,
+                    type: 'get',
+                    dataType: 'json',
+                    success: function(ret) {
+                        data = ret['res'];
                         $('.jev_id').val(data[0].jev_id);
                         $('.jev_num').val(data[0].jev_num);
                         $('.check_num').val(data[0].check_num);
@@ -129,96 +146,105 @@
                 })
             }
             $.ajax({
-                url : 'read_check/',
-                type : 'get',
-                data : { own_url : sav_url, jev_id : id},
-                success : function(ret) {
+                url: 'read_check/',
+                type: 'get',
+                data: {
+                    own_url: sav_url,
+                    jev_id: id
+                },
+                success: function(ret) {
                     $('#myUL').html(ret['res']);
                 }
             });
             $('.addBtn').click(() => {
                 var record = $('.add_check').val();
                 var jev_id = $('.jev_id').val();
-                if(!id){
+                if (!id) {
                     alert("Can not input transactions without JEV record !");
                     //window.location.replace(own_url);
                 }
                 $.ajax({
                     url: 'add_check/',
                     type: 'get',
-                    data: { title : record, own_url : sav_url, jev_id : jev_id},
+                    data: {
+                        title: record,
+                        own_url: sav_url,
+                        jev_id: jev_id
+                    },
                     success: function(ret) {
                         window.location.replace(own_url);
                     }
                 });
             });
             $('.removeBtn').click(() => {
-                var id = $('#myUL input[type="checkbox"]:checked').map(function () {
+                var id = $('#myUL input[type="checkbox"]:checked').map(function() {
                     return $(this).val();
                 }).get();
                 $.ajax({
-                    url:'remove_checklist/',
+                    url: 'remove_checklist/',
                     type: 'get',
-                    data: {id : id},
+                    data: {
+                        id: id
+                    },
                     success: function(res) {
                         alert("Delete successful!")
                         window.location.replace(own_url);
-                    } 
+                    }
                 });
             });
             $('#savedata').click(() => {
-                if(!id){                    
-                    $.ajax({                        // all URLs are relative to http://localhost:3000/
-                    url: 'insert_record',
-                    type: 'get',
-                    dataType: 'json',
-                    data: {
-                        jev_num: $('.jev_num').val(),
-                        check_num: $('.check_num').val(),
-                        amount: $('.amount').val(),
-                        status: $('#sel_opt').val(),
-                        voucher_num: $('.voucher_num').val(),
-                        voucher_date: $('.voucher_date').val(),
-                        payee: $('.payee').val(),
-                        source_fund: $('.source_fund').val(),
-                        transaction_type: $('.transaction_type').val(),
-                        sub_doc: $('.sub_doc').val(),
-                                unsub_doc: $('.unsub_doc').val(),
-                                own_url:sav_url
-                },
-                success: (data) => {
+                if (!id) {
+                    $.ajax({ // all URLs are relative to http://localhost:3000/
+                        url: 'insert_record',
+                        type: 'get',
+                        dataType: 'json',
+                        data: {
+                            jev_num: $('.jev_num').val(),
+                            check_num: $('.check_num').val(),
+                            amount: $('.amount').val(),
+                            status: $('#sel_opt').val(),
+                            voucher_num: $('.voucher_num').val(),
+                            voucher_date: $('.voucher_date').val(),
+                            payee: $('.payee').val(),
+                            source_fund: $('.source_fund').val(),
+                            transaction_type: $('.transaction_type').val(),
+                            sub_doc: $('.sub_doc').val(),
+                            unsub_doc: $('.unsub_doc').val(),
+                            own_url: sav_url
+                        },
+                        success: (data) => {
                             window.location.replace("http://localhost:3000");
                         },
                     });
                 } else {
                     $.ajax({
-                        url:"realupdate_record",
-                        type:'get',
-                        dataType:'json',
+                        url: "realupdate_record",
+                        type: 'get',
+                        dataType: 'json',
                         data: {
-                                jev_id: id,
-                                jev_num: $('.jev_num').val(),
-                                check_num: $('.check_num').val(),
-                                amount: $('.amount').val(),
-                                status: $('#sel_opt').val(),
-                                voucher_num: $('.voucher_num').val(),
-                                voucher_date: $('.voucher_date').val(),
-                                payee: $('.payee').val(),
-                                source_fund: $('.source_fund').val(),
-                                transaction_type: $('.transaction_type').val(),
-                                sub_doc: $('.sub_doc').val(),
-                                unsub_doc: $('.unsub_doc').val(),
-                                own_url:sav_url
-                },
+                            jev_id: id,
+                            jev_num: $('.jev_num').val(),
+                            check_num: $('.check_num').val(),
+                            amount: $('.amount').val(),
+                            status: $('#sel_opt').val(),
+                            voucher_num: $('.voucher_num').val(),
+                            voucher_date: $('.voucher_date').val(),
+                            payee: $('.payee').val(),
+                            source_fund: $('.source_fund').val(),
+                            transaction_type: $('.transaction_type').val(),
+                            sub_doc: $('.sub_doc').val(),
+                            unsub_doc: $('.unsub_doc').val(),
+                            own_url: sav_url
+                        },
                         success: function(ret) {
                             console.log("update success")
                             window.location.replace("http://localhost:3000");
-                        } 
-                });
+                        }
+                    });
                 }
             });
         });
-    </script>    
+    </script>
 </body>
 
 </html>

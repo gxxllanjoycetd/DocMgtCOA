@@ -53,6 +53,27 @@
         #myTable tr:hover {
             background-color: #f1f1f1;
         }
+        
+        @media screen {
+            #printSection {
+                display: none;
+            }
+        }
+        
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #printSection,
+            #printSection * {
+                visibility: visible;
+            }
+            #printSection {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+        }
     </style>
     <link href="bootstrap.min.css" rel="stylesheet" type="text/css" />
 </head>
@@ -164,7 +185,7 @@
                         </div>
                         <div>
                             <div class="col-md-4">
-                                <h4 style="margin:5px">Brgy. :</h4>
+                                <h4 style="margin:5px">Office :</h4>
                             </div>
                             <div class="col-md-8">
                                 <input style="width: 95%;" type="text" id="myInput" placeholder="List" class="sub_docs">
@@ -194,9 +215,9 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h1 class="modal-title" style="text-align:center">Generated Report</h1>
+                    <h1 class="modal-title" style="text-align:center">MEMO</h1>
                 </div>
-                <div class="modal-body">
+                <div id="generate_memo" class="modal-body">
                     <form style="font-size: 18px; ">
                         <div>
                             <div class="col-md-4">
@@ -273,10 +294,10 @@
                         </div><br>
                         <div>
                             <div class="col-md-4">
-                                <h4 style="margin:5px">Baranggay :</h4>
+                                <h4 style="margin:5px">Office :</h4>
                             </div>
                             <div class="col-md-8">
-                                <h4 class="sub_doc_text" style="margin:5px">Baranggay</h4>
+                                <h4 class="sub_doc_text" style="margin:5px">Office</h4>
                             </div>
                         </div><br>
                         <div>
@@ -291,8 +312,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" data-dismiss="modal" class="btn dark btn-outline">Close</button>
-                    <button type="button" class="btn green">Save changes</button>
+                    <!--<button type="button" data-dismiss="modal" class="btn dark btn-outline">Close</button>-->
+                    <button type="button" id="Print" class="btn btn-primary">Print</button>
                 </div>
             </div>
         </div>
@@ -328,7 +349,7 @@
                                                     <th style="width: 13%; text-align: center">Payee</th>
                                                     <th style="width: 10%; text-align: center">Source of Fund</th>
                                                     <th style="width: 16%; text-align: center">Type of Transaction</th>
-                                                    <th style="width: 25%; text-align:center">Brgy./Notes</th>                                                
+                                                    <th style="display:none; width: 0%; text-align:center">Office/Notes</th>                                                
                                                 </tr>
                                             </thead>
                                             <tbody>`;
@@ -340,6 +361,15 @@
                 })
             }
         })
+
+        $(document).ready(function() {
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#jevtable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
 
 
         $("body").on("click", "#refresh_table", function() {
@@ -418,6 +448,26 @@
                 alert("Please check the row!")
             }
         })
+
+        document.getElementById("Print").onclick = function() {
+            printElement(document.getElementById("generate_modal"));
+        };
+
+        function printElement(elem) {
+            var domClone = elem.cloneNode(true);
+
+            var $printSection = document.getElementById("printSection");
+
+            if (!$printSection) {
+                var $printSection = document.createElement("div");
+                $printSection.id = "printSection";
+                document.body.appendChild($printSection);
+            }
+
+            $printSection.innerHTML = "";
+            $printSection.appendChild(domClone);
+            window.print();
+        }
     </script>
 
 </body>
